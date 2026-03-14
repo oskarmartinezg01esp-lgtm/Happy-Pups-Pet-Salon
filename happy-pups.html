@@ -664,28 +664,31 @@ footer a:hover{color:var(--gold)}
     </div>
   </div>
   <ul class="nav-links">
-    <li><a href="#about">Nosotros</a></li>
-    <li><a href="#services">Servicios</a></li>
-    <li><a href="#gallery">Galería</a></li>
-    <li><a href="#booking">Reservar</a></li>
-    <li><a href="#contact">Contacto</a></li>
+    <li><a href="#about" data-i18n="nav_about">Nosotros</a></li>
+    <li><a href="#services" data-i18n="nav_services">Servicios</a></li>
+    <li><a href="#gallery" data-i18n="nav_gallery">Galería</a></li>
+    <li><a href="#booking" data-i18n="nav_book_link">Reservar</a></li>
+    <li><a href="#contact" data-i18n="nav_contact">Contacto</a></li>
   </ul>
-  <a href="#booking" class="nav-book">Reservar Cita</a>
+  <div style="display:flex;align-items:center;gap:12px">
+    <a href="#booking" class="nav-book" data-i18n="nav_book">Reservar Cita</a>
+    <button id="langBtn" onclick="toggleLang()" style="background:transparent;border:1px solid rgba(212,175,55,.4);border-radius:4px;padding:7px 14px;cursor:pointer;font-family:'Nunito Sans',sans-serif;font-size:.72rem;font-weight:800;letter-spacing:.12em;color:var(--gold);transition:all .25s;white-space:nowrap;">ES / EN</button>
+  </div>
   <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
   <div class="hero-text">
-    <div class="hero-eyebrow">Aventura, Florida · Premier Pet Grooming</div>
-    <h1>Where every pup<br><strong>feels beautiful</strong></h1>
-    <p class="hero-sub">Grooming & spa services crafted with love for your four-legged family member. Professional, gentle, and always unforgettable.</p>
+    <div class="hero-eyebrow" data-i18n="hero_eyebrow">Aventura, Florida · Premier Pet Grooming</div>
+    <h1 data-i18n="hero_h1">Donde cada perrito<br><strong>merece lo mejor</strong></h1>
+    <p class="hero-sub" data-i18n="hero_sub">Servicios de grooming & spa hechos con amor para tu compañero de cuatro patas. Profesional, suave e inolvidable.</p>
     <div class="hero-btns">
       <a href="#booking" class="btn-gold">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/></svg>
-        Reservar Cita
+        <span data-i18n="hero_btn1">Reservar Cita</span>
       </a>
-      <a href="#services" class="btn-outline">Ver Servicios →</a>
+      <a href="#services" class="btn-outline" data-i18n="hero_btn2">Ver Servicios →</a>
     </div>
   </div>
   <div class="hero-video-wrap">
@@ -702,7 +705,7 @@ footer a:hover{color:var(--gold)}
     <div class="hero-stats">
       <div class="hs-item">
         <div class="hs-num">500+</div>
-        <div class="hs-label">Clientes Felices</div>
+        <div class="hs-label" data-i18n="stat1">Clientes Felices</div>
       </div>
       <div class="hs-item">
         <div class="hs-num">5★</div>
@@ -710,7 +713,7 @@ footer a:hover{color:var(--gold)}
       </div>
       <div class="hs-item">
         <div class="hs-num">100%</div>
-        <div class="hs-label">Satisfacción</div>
+        <div class="hs-label" data-i18n="stat3">Satisfacción</div>
       </div>
     </div>
   </div>
@@ -739,21 +742,21 @@ footer a:hover{color:var(--gold)}
     <div class="am-badge">
       <div class="ab-icon">⭐</div>
       <div>
-        <div class="ab-label">Calificación</div>
-        <div class="ab-val">5 Estrellas en Yelp</div>
+        <div class="ab-label" data-i18n="badge_label">Calificación</div>
+        <div class="ab-val" data-i18n="badge_val">5 Estrellas en Yelp</div>
       </div>
     </div>
   </div>
   <div class="reveal rd1">
-    <div class="s-tag">Sobre Nosotros</div>
-    <h2 class="s-heading">Tu mascota,<br>nuestra <em>pasión</em></h2>
-    <p>En Happy Pups Pet Salon, tratamos a cada perrito como si fuera nuestro propio. Con años de experiencia en Aventura, FL, ofrecemos peluquería canina de primera clase en un ambiente cálido y amoroso.</p>
-    <p>At Happy Pups, we believe every dog deserves to look and feel their absolute best. Our certified groomers use premium, gentle products tailored to every breed and temperament.</p>
+    <div class="s-tag" data-i18n="about_tag">Sobre Nosotros</div>
+    <h2 class="s-heading" data-i18n="about_h2">Tu mascota,<br>nuestra <em>pasión</em></h2>
+    <p data-i18n="about_p1">En Happy Pups Pet Salon, tratamos a cada perrito como si fuera nuestro propio. Con años de experiencia en Aventura, FL, ofrecemos peluquería canina de primera clase en un ambiente cálido y amoroso.</p>
+    <p data-i18n="about_p2">Nuestros groomers certificados usan productos premium y técnicas suaves adaptadas a cada raza y temperamento.</p>
     <div class="about-pills">
-      <span class="pill">🏅 Groomers Certificados</span>
-      <span class="pill">🌿 Productos Naturales</span>
-      <span class="pill">❤️ Ambiente Familiar</span>
-      <span class="pill">✂️ Todas las Razas</span>
+      <span class="pill" data-i18n="pill1">🏅 Groomers Certificados</span>
+      <span class="pill" data-i18n="pill2">🌿 Productos Naturales</span>
+      <span class="pill" data-i18n="pill3">❤️ Ambiente Familiar</span>
+      <span class="pill" data-i18n="pill4">✂️ Todas las Razas</span>
       <span class="pill">📍 Aventura, FL</span>
     </div>
   </div>
@@ -762,8 +765,8 @@ footer a:hover{color:var(--gold)}
 <!-- SERVICES -->
 <section class="services" id="services">
   <div class="reveal" style="max-width:600px">
-    <div class="s-tag">Servicios & Precios</div>
-    <h2 class="s-heading">Grooming packages<br>for every <em>pup</em></h2>
+    <div class="s-tag" data-i18n="svc_tag">Servicios & Precios</div>
+    <h2 class="s-heading" data-i18n="svc_h2">Paquetes para<br>cada <em>perrito</em></h2>
   </div>
   <div class="services-grid">
     <div class="svc-card reveal rd1"><img src="https://res.cloudinary.com/dmrc5nwyd/image/upload/v1772882337/Captura_de_pantalla_2026-03-06_231123_toqith.png" alt="Servicio 1"></div>
@@ -775,8 +778,8 @@ footer a:hover{color:var(--gold)}
 <!-- GALLERY -->
 <section class="gallery" id="gallery">
   <div class="reveal" style="text-align:center">
-    <div class="s-tag" style="justify-content:center">Galería</div>
-    <h2 class="s-heading">Nuestros <em>peluditos</em></h2>
+    <div class="s-tag" style="justify-content:center" data-i18n="gal_tag">Galería</div>
+    <h2 class="s-heading" data-i18n="gal_h2">Nuestros <em>peluditos</em></h2>
   </div>
   <div class="gallery-grid">
     <div class="gi reveal">
@@ -798,39 +801,39 @@ footer a:hover{color:var(--gold)}
 <section class="booking" id="booking">
   <div class="booking-layout">
     <div class="booking-info reveal">
-      <div class="s-tag">Reservaciones</div>
-      <h2 class="s-heading">Agenda tu <em>cita</em></h2>
-      <p>Completa el formulario y te contactaremos por WhatsApp para confirmar tu cita. Fill out the form and we'll confirm via WhatsApp.</p>
+      <div class="s-tag" data-i18n="book_tag">Reservaciones</div>
+      <h2 class="s-heading" data-i18n="book_h2">Agenda tu <em>cita</em></h2>
+      <p data-i18n="book_p">Completa el formulario y te contactaremos por WhatsApp para confirmar tu cita.</p>
       <div class="booking-promise">
-        <div class="bp-item"><div class="bp-check">✓</div>Confirmación rápida por WhatsApp</div>
-        <div class="bp-item"><div class="bp-check">✓</div>Groomers certificados y con experiencia</div>
-        <div class="bp-item"><div class="bp-check">✓</div>Productos premium y seguros para tu perro</div>
-        <div class="bp-item"><div class="bp-check">✓</div>Ambiente tranquilo y libre de estrés</div>
+        <div class="bp-item"><div class="bp-check">✓</div><span data-i18n="promise1">Confirmación rápida por WhatsApp</span></div>
+        <div class="bp-item"><div class="bp-check">✓</div><span data-i18n="promise2">Groomers certificados y con experiencia</span></div>
+        <div class="bp-item"><div class="bp-check">✓</div><span data-i18n="promise3">Productos premium y seguros para tu perro</span></div>
+        <div class="bp-item"><div class="bp-check">✓</div><span data-i18n="promise4">Ambiente tranquilo y libre de estrés</span></div>
       </div>
     </div>
     <div class="booking-form reveal rd1">
       <form id="bookingForm">
         <div class="form-row">
           <div class="f-group">
-            <label>Nombre / Name *</label>
-            <input type="text" id="f-name" placeholder="Tu nombre completo" required>
+            <label data-i18n="lbl_name">Nombre *</label>
+            <input type="text" id="f-name" data-i18n-ph="ph_name" placeholder="Tu nombre completo" required>
           </div>
           <div class="f-group">
-            <label>Correo / Email *</label>
+            <label data-i18n="lbl_email">Correo *</label>
             <input type="email" id="f-email" placeholder="tu@email.com" required>
           </div>
           <div class="f-group">
-            <label>Teléfono / Phone *</label>
+            <label data-i18n="lbl_phone">Teléfono *</label>
             <input type="tel" id="f-phone" placeholder="(305) 000-0000" required>
           </div>
           <div class="f-group">
-            <label>Nombre del Perro *</label>
-            <input type="text" id="f-dog" placeholder="¿Cómo se llama?" required>
+            <label data-i18n="lbl_dog">Nombre del Perro *</label>
+            <input type="text" id="f-dog" data-i18n-ph="ph_dog" placeholder="¿Cómo se llama?" required>
           </div>
           <div class="f-group">
-            <label>Servicio / Service *</label>
+            <label data-i18n="lbl_service">Servicio *</label>
             <select id="f-service" required>
-              <option value="">Seleccionar servicio...</option>
+              <option value="" data-i18n="opt_select">Seleccionar servicio...</option>
               <option>Bath & Brush — Baño y Cepillado</option>
               <option>Full Grooming — Corte Completo</option>
               <option>Nail Trim — Corte de Uñas</option>
@@ -842,33 +845,33 @@ footer a:hover{color:var(--gold)}
             </select>
           </div>
           <div class="f-group">
-            <label>Fecha Preferida / Preferred Date</label>
+            <label data-i18n="lbl_date">Fecha Preferida</label>
             <input type="date" id="f-date">
           </div>
           <div class="f-group">
-            <label>Hora Preferida / Preferred Time</label>
+            <label data-i18n="lbl_time">Hora Preferida</label>
             <input type="time" id="f-time">
           </div>
           <div class="f-group">
-            <label>Raza / Breed *</label>
-            <input type="text" id="f-breed" placeholder="Ej: Golden Retriever, Poodle..." required>
+            <label data-i18n="lbl_breed">Raza *</label>
+            <input type="text" id="f-breed" data-i18n-ph="ph_breed" placeholder="Ej: Golden Retriever, Poodle..." required>
           </div>
           <div class="f-group">
-            <label>Edad / Age *</label>
-            <input type="text" id="f-age" placeholder="Ej: 2 años / 6 meses" required>
+            <label data-i18n="lbl_age">Edad *</label>
+            <input type="text" id="f-age" data-i18n-ph="ph_age" placeholder="Ej: 2 años / 6 meses" required>
           </div>
           <div class="f-group full">
-            <label>Condición Médica / Medical Condition</label>
-            <textarea id="f-condition" placeholder="¿Tiene alguna condición de salud, alergia o necesidad especial? / Any health condition, allergy or special need?"></textarea>
+            <label data-i18n="lbl_condition">Condición Médica</label>
+            <textarea id="f-condition" data-i18n-ph="ph_condition" placeholder="¿Tiene alguna condición de salud, alergia o necesidad especial?"></textarea>
           </div>
           <div class="f-group full">
-            <label>Notas Adicionales / Additional Notes</label>
-            <textarea id="f-notes" placeholder="Cualquier otra información importante... / Any other important information..."></textarea>
+            <label data-i18n="lbl_notes">Notas Adicionales</label>
+            <textarea id="f-notes" data-i18n-ph="ph_notes" placeholder="Cualquier otra información importante..."></textarea>
           </div>
         </div>
         <button type="submit" class="form-submit-btn">
           <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-          Enviar por WhatsApp
+          <span data-i18n="btn_submit">Enviar por WhatsApp</span>
         </button>
       </form>
     </div>
@@ -877,9 +880,9 @@ footer a:hover{color:var(--gold)}
 
 <!-- CONTACT -->
 <section class="contact" id="contact">
-  <div class="s-tag reveal">Contacto</div>
-  <h2 class="s-heading reveal rd1">Estamos aquí <em>para ti</em></h2>
-  <p class="contact-sub reveal rd2">¿Tienes preguntas? Contáctanos directamente. We're always happy to help.</p>
+  <div class="s-tag reveal" data-i18n="contact_tag">Contacto</div>
+  <h2 class="s-heading reveal rd1" data-i18n="contact_h2">Estamos aquí <em>para ti</em></h2>
+  <p class="contact-sub reveal rd2" data-i18n="contact_sub">¿Tienes preguntas? Contáctanos directamente.</p>
   <div class="contact-grid reveal rd3">
     <a href="https://wa.me/17866610388" target="_blank" class="c-card">
       <div class="cc-icon">💬</div>
@@ -887,11 +890,11 @@ footer a:hover{color:var(--gold)}
     </a>
     <div class="c-card">
       <div class="cc-icon">📍</div>
-      <div><div class="cc-label">Ubicación</div><div class="cc-val">Aventura, FL</div></div>
+      <div><div class="cc-label" data-i18n="contact_loc">Ubicación</div><div class="cc-val">Aventura, FL</div></div>
     </div>
     <a href="https://www.yelp.com/biz/happy-pups-pet-salon-aventura" target="_blank" class="c-card">
       <div class="cc-icon">⭐</div>
-      <div><div class="cc-label">Reseñas Yelp</div><div class="cc-val">Ver perfil →</div></div>
+      <div><div class="cc-label" data-i18n="contact_yelp">Reseñas Yelp</div><div class="cc-val" data-i18n="contact_yelp_val">Ver perfil →</div></div>
     </a>
   </div>
 </section>
@@ -909,6 +912,106 @@ footer a:hover{color:var(--gold)}
 </a>
 
 <script>
+/* ── LANGUAGE TOGGLE ── */
+const translations = {
+  es: {
+    nav_about:'Nosotros', nav_services:'Servicios', nav_gallery:'Galería',
+    nav_book_link:'Reservar', nav_contact:'Contacto', nav_book:'Reservar Cita',
+    hero_eyebrow:'Aventura, Florida · Peluquería Premium',
+    hero_h1:'Donde cada perrito<br><strong>merece lo mejor</strong>',
+    hero_sub:'Servicios de grooming & spa hechos con amor para tu compañero de cuatro patas. Profesional, suave e inolvidable.',
+    hero_btn1:'Reservar Cita', hero_btn2:'Ver Servicios →',
+    stat1:'Clientes Felices', stat3:'Satisfacción',
+    badge_label:'Calificación', badge_val:'5 Estrellas en Yelp',
+    about_tag:'Sobre Nosotros',
+    about_h2:'Tu mascota,<br>nuestra <em>pasión</em>',
+    about_p1:'En Happy Pups Pet Salon, tratamos a cada perrito como si fuera nuestro propio. Con años de experiencia en Aventura, FL, ofrecemos peluquería canina de primera clase en un ambiente cálido y amoroso.',
+    about_p2:'Nuestros groomers certificados usan productos premium y técnicas suaves adaptadas a cada raza y temperamento.',
+    pill1:'🏅 Groomers Certificados', pill2:'🌿 Productos Naturales',
+    pill3:'❤️ Ambiente Familiar', pill4:'✂️ Todas las Razas',
+    svc_tag:'Servicios & Precios',
+    svc_h2:'Paquetes para<br>cada <em>perrito</em>',
+    gal_tag:'Galería', gal_h2:'Nuestros <em>peluditos</em>',
+    book_tag:'Reservaciones',
+    book_h2:'Agenda tu <em>cita</em>',
+    book_p:'Completa el formulario y te contactaremos por WhatsApp para confirmar tu cita.',
+    promise1:'Confirmación rápida por WhatsApp',
+    promise2:'Groomers certificados y con experiencia',
+    promise3:'Productos premium y seguros para tu perro',
+    promise4:'Ambiente tranquilo y libre de estrés',
+    lbl_name:'Nombre *', ph_name:'Tu nombre completo',
+    lbl_email:'Correo *', lbl_phone:'Teléfono *',
+    lbl_dog:'Nombre del Perro *', ph_dog:'¿Cómo se llama?',
+    lbl_service:'Servicio *', opt_select:'Seleccionar servicio...',
+    lbl_date:'Fecha Preferida', lbl_time:'Hora Preferida',
+    lbl_breed:'Raza *', ph_breed:'Ej: Golden Retriever, Poodle...',
+    lbl_age:'Edad *', ph_age:'Ej: 2 años / 6 meses',
+    lbl_condition:'Condición Médica', ph_condition:'¿Tiene alguna condición de salud, alergia o necesidad especial?',
+    lbl_notes:'Notas Adicionales', ph_notes:'Cualquier otra información importante...',
+    btn_submit:'Enviar por WhatsApp',
+    contact_tag:'Contacto',
+    contact_h2:'Estamos aquí <em>para ti</em>',
+    contact_sub:'¿Tienes preguntas? Contáctanos directamente.',
+    contact_loc:'Ubicación', contact_yelp:'Reseñas Yelp', contact_yelp_val:'Ver perfil →',
+  },
+  en: {
+    nav_about:'About', nav_services:'Services', nav_gallery:'Gallery',
+    nav_book_link:'Book', nav_contact:'Contact', nav_book:'Book Now',
+    hero_eyebrow:'Aventura, Florida · Premier Pet Grooming',
+    hero_h1:'Where every pup<br><strong>feels beautiful</strong>',
+    hero_sub:'Grooming & spa services crafted with love for your four-legged family member. Professional, gentle, and always unforgettable.',
+    hero_btn1:'Book Appointment', hero_btn2:'View Services →',
+    stat1:'Happy Clients', stat3:'Satisfaction',
+    badge_label:'Rating', badge_val:'5 Stars on Yelp',
+    about_tag:'About Us',
+    about_h2:'Your pet,<br>our <em>passion</em>',
+    about_p1:'At Happy Pups Pet Salon, we treat every dog as if it were our own. With years of experience in Aventura, FL, we offer top-tier dog grooming in a warm and loving environment.',
+    about_p2:'Our certified groomers use premium products and gentle techniques tailored to every breed and temperament.',
+    pill1:'🏅 Certified Groomers', pill2:'🌿 Natural Products',
+    pill3:'❤️ Family Environment', pill4:'✂️ All Breeds',
+    svc_tag:'Services & Pricing',
+    svc_h2:'Grooming packages<br>for every <em>pup</em>',
+    gal_tag:'Gallery', gal_h2:'Our favorite <em>pups</em>',
+    book_tag:'Reservations',
+    book_h2:'Book your <em>appointment</em>',
+    book_p:'Fill out the form and we\'ll contact you via WhatsApp to confirm your appointment.',
+    promise1:'Quick confirmation via WhatsApp',
+    promise2:'Certified and experienced groomers',
+    promise3:'Premium products safe for your dog',
+    promise4:'Calm and stress-free environment',
+    lbl_name:'Name *', ph_name:'Your full name',
+    lbl_email:'Email *', lbl_phone:'Phone *',
+    lbl_dog:'Dog\'s Name *', ph_dog:'What\'s their name?',
+    lbl_service:'Service *', opt_select:'Select a service...',
+    lbl_date:'Preferred Date', lbl_time:'Preferred Time',
+    lbl_breed:'Breed *', ph_breed:'E.g: Golden Retriever, Poodle...',
+    lbl_age:'Age *', ph_age:'E.g: 2 years / 6 months',
+    lbl_condition:'Medical Condition', ph_condition:'Any health condition, allergy or special need?',
+    lbl_notes:'Additional Notes', ph_notes:'Any other important information...',
+    btn_submit:'Send via WhatsApp',
+    contact_tag:'Contact',
+    contact_h2:'We\'re here <em>for you</em>',
+    contact_sub:'Have questions? Contact us directly. We\'re always happy to help.',
+    contact_loc:'Location', contact_yelp:'Yelp Reviews', contact_yelp_val:'View profile →',
+  }
+};
+let currentLang = 'es';
+function toggleLang(){
+  currentLang = currentLang === 'es' ? 'en' : 'es';
+  const t = translations[currentLang];
+  const btn = document.getElementById('langBtn');
+  btn.textContent = currentLang === 'es' ? 'ES / EN' : 'EN / ES';
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    const key = el.getAttribute('data-i18n');
+    if(t[key] !== undefined) el.innerHTML = t[key];
+  });
+  document.querySelectorAll('[data-i18n-ph]').forEach(el=>{
+    const key = el.getAttribute('data-i18n-ph');
+    if(t[key] !== undefined) el.placeholder = t[key];
+  });
+  document.querySelector('html').setAttribute('lang', currentLang);
+}
+
 function toggleMute(){
   const v=document.getElementById('heroVideo');
   const btn=document.getElementById('muteBtn');
