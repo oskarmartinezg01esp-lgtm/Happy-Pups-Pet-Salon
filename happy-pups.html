@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Pups Pet Salon — Aventura, FL</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Nunito+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --black:#080808;
+  --black-soft:#111111;
+  --black-mid:#1A1A1A;
+  --black-light:#242424;
+  --white:#F8F8F8;
+  --white-pure:#FFFFFF;
+  --gray-light:#E0E0E0;
+  --gray-mid:#9A9A9A;
+  --gray-dark:#4A4A4A;
+  --gold:#D4AF37;
+  --gold-light:#F0D060;
+  --gold-dark:#A8860A;
+  --gold-pale:#F5E9B8;
+  --silver:#C8C8C8;
+  --silver-dark:#888888;
+
+  --metal-gold: linear-gradient(135deg, #BFA045 0%, #F0D060 30%, #D4AF37 50%, #F5E890 70%, #A8860A 100%);
+  --metal-silver: linear-gradient(135deg, #888 0%, #E0E0E0 30%, #C0C0C0 50%, #F8F8F8 70%, #7A7A7A 100%);
+  --metal-dark: linear-gradient(135deg, #2A2A2A 0%, #4A4A4A 40%, #1A1A1A 100%);
+}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Nunito Sans',sans-serif;
+  background:linear-gradient(160deg,#0A0A0A 0%,#141414 30%,#0D0D0D 60%,#111 100%);
+  background-attachment:fixed;
+  color:var(--white);
+  overflow-x:hidden;
+  position:relative;
+}
+
+/* metallic shimmer text utility */
+.gold-text{
+  background:var(--metal-gold);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+.silver-text{
+  background:var(--metal-silver);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+
+/* ── NAV ── */
+#nav{
+  position:fixed;top:0;left:0;right:0;z-index:500;
+  padding:0 5%;height:78px;
+  display:flex;align-items:center;justify-content:space-between;
+  transition:background .4s,box-shadow .4s,height .4s;
+  background:transparent;
+}
+#nav.solid{
+  background:rgba(8,8,8,.97);
+  backdrop-filter:blur(20px);
+  height:62px;
+  border-bottom:1px solid rgba(212,175,55,.18);
+  box-shadow:0 4px 40px rgba(0,0,0,.6);
+}
+.nav-logo{height:48px;width:auto;transition:height .4s}
+#nav.solid .nav-logo{height:38px}
+.nav-links{display:flex;gap:38px;list-style:none}
+.nav-links a{
+  font-size:.74rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  color:rgba(255,255,255,.55);text-decoration:none;transition:color .25s;
+  position:relative;
+}
+.nav-links a::after{
+  content:'';position:absolute;bottom:-4px;left:0;right:0;height:1px;
+  background:var(--metal-gold);transform:scaleX(0);transform-origin:right;transition:transform .3s;
+}
+.nav-links a:hover{color:var(--gold-light)}
+.nav-links a:hover::after{transform:scaleX(1);transform-origin:left}
+.nav-book{
+  padding:10px 28px;border-radius:2px;
+  background:var(--metal-gold);color:var(--black);
+  font-size:.74rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;
+  text-decoration:none;transition:opacity .25s,transform .2s;
+  box-shadow:0 4px 24px rgba(212,175,55,.35);
+}
+.nav-brand-name{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.15rem;font-weight:600;letter-spacing:.04em;
+  background:var(--metal-gold);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  line-height:1.1;
+}
+.nav-brand-sub{
+  font-size:.58rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  color:#999;line-height:1;margin-top:2px;
+}
+#nav:not(.solid) .nav-brand-name{
+  background:linear-gradient(135deg,#fff 0%,#F0D060 40%,#D4AF37 70%,#fff 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+#nav:not(.solid) .nav-brand-sub{color:rgba(255,255,255,.45)}
+#nav.solid .nav-brand-sub{color:#888}
+
+/* ── PAW PRINTS DECORATION ── */
+.paw-deco{
+  position:absolute;pointer-events:none;user-select:none;z-index:1;
+  opacity:0;animation:pawfade var(--dur,7s) ease-in-out infinite;
+}
+@keyframes pawfade{
+  0%,100%{opacity:0;transform:scale(.85) rotate(var(--rot,0deg))}
+  35%,65%{opacity:var(--op,.18);transform:scale(1) rotate(var(--rot,0deg))}
+}
+.paw-deco img{
+  width:var(--sz,90px);height:var(--sz,90px);
+  display:block;
+  filter:sepia(1) saturate(6) hue-rotate(5deg) brightness(1.2) contrast(1.1)
+         drop-shadow(0 3px 14px rgba(212,175,55,.5));
+}
+
+.nav-book:hover{opacity:.85;transform:translateY(-1px)}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
+.hamburger span{display:block;width:22px;height:1.5px;background:var(--silver);border-radius:2px;transition:.3s}
+
+/* ── HERO ── */
+.hero{
+  min-height:100svh;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  align-items:center;
+  padding:100px 5% 60px;
+  gap:60px;
+  position:relative;
+  overflow:hidden;
+}
+/* bg lines decoration */
+.hero::before{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background:
+    linear-gradient(90deg,rgba(212,175,55,.03) 1px,transparent 1px),
+    linear-gradient(180deg,rgba(212,175,55,.03) 1px,transparent 1px);
+  background-size:80px 80px;
+}
+.hero-text{position:relative;z-index:2}
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:10px;
+  border:1px solid rgba(212,175,55,.5);
+  border-radius:2px;padding:7px 20px;
+  font-size:.7rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--gold-dark);margin-bottom:28px;
+  background:rgba(212,175,55,.07);
+}
+.hero-eyebrow::before{content:'◆';font-size:.55rem;color:var(--gold)}
+.hero h1{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(3rem,5.5vw,5.5rem);
+  font-weight:300;line-height:1.05;
+  color:var(--white);
+  margin-bottom:22px;letter-spacing:-.01em;
+}
+.hero h1 strong{
+  display:block;font-weight:600;
+  background:var(--metal-gold);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.hero-sub{
+  font-size:.97rem;color:var(--gray-mid);line-height:1.8;
+  max-width:420px;margin-bottom:40px;font-weight:300;
+}
+.hero-btns{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+.btn-gold{
+  background:var(--metal-gold);color:var(--black);
+  padding:16px 38px;border-radius:2px;
+  font-size:.82rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;
+  text-decoration:none;transition:all .25s;
+  box-shadow:0 6px 28px rgba(212,175,55,.3);
+  display:inline-flex;align-items:center;gap:8px;
+}
+.btn-gold:hover{transform:translateY(-2px);box-shadow:0 10px 40px rgba(212,175,55,.45)}
+.btn-outline{
+  border:1px solid rgba(212,175,55,.45);color:var(--gold-light);
+  padding:14px 34px;border-radius:2px;
+  font-size:.82rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+  text-decoration:none;transition:all .25s;
+}
+.btn-outline:hover{background:rgba(212,175,55,.08);border-color:var(--gold);transform:translateY(-1px)}
+
+/* hero video side */
+.hero-video-wrap{
+  position:relative;z-index:2;
+}
+.hero-video-frame{
+  position:relative;
+  border:1px solid rgba(212,175,55,.2);
+  border-radius:4px;
+  overflow:hidden;
+  background:linear-gradient(160deg,#0A0A0A 0%,#141414 30%,#0D0D0D 60%,#111 100%);
+  box-shadow:
+    0 0 0 1px rgba(212,175,55,.1),
+    0 24px 80px rgba(0,0,0,.7),
+    inset 0 0 60px rgba(0,0,0,.3);
+}
+/* gold corner accents */
+.hero-video-frame::before,.hero-video-frame::after{
+  content:'';position:absolute;z-index:5;pointer-events:none;
+  width:20px;height:20px;
+}
+.hero-video-frame::before{top:0;left:0;border-top:2px solid var(--gold);border-left:2px solid var(--gold)}
+.hero-video-frame::after{bottom:0;right:0;border-bottom:2px solid var(--gold);border-right:2px solid var(--gold)}
+.hero-video-frame video{
+  width:100%;
+  height:auto;
+  display:block;
+  max-height:75vh;
+  object-fit:contain;
+  background:#000;
+}
+.mute-btn{
+  position:absolute;bottom:14px;right:14px;z-index:10;
+  width:40px;height:40px;border-radius:50%;border:1px solid rgba(212,175,55,.4);
+  cursor:pointer;background:rgba(8,8,8,.75);backdrop-filter:blur(8px);
+  display:flex;align-items:center;justify-content:center;
+  transition:all .25s;
+}
+.mute-btn:hover{background:rgba(212,175,55,.15);border-color:var(--gold)}
+.mute-btn.unmuted{background:rgba(212,175,55,.2);border-color:var(--gold)}
+.mute-btn svg{width:17px;height:17px;fill:var(--gold)}
+/* hero stats strip */
+.hero-stats{
+  display:flex;gap:0;margin-top:24px;
+  border:1px solid rgba(212,175,55,.3);border-radius:4px;overflow:hidden;
+}
+.hs-item{
+  flex:1;padding:16px 20px;text-align:center;
+  border-right:1px solid rgba(212,175,55,.2);
+  background:rgba(212,175,55,.04);
+}
+.hs-item:last-child{border-right:none}
+.hs-num{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.8rem;font-weight:600;
+  background:var(--metal-gold);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  line-height:1;
+}
+.hs-label{font-size:.65rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gray-dark);margin-top:4px}
+
+/* ── TICKER ── */
+.ticker{
+  background:var(--black-mid);
+  border-top:1px solid rgba(212,175,55,.12);
+  border-bottom:1px solid rgba(212,175,55,.12);
+  padding:13px 0;overflow:hidden;white-space:nowrap;
+}
+.ticker-inner{display:inline-flex;animation:tick 30s linear infinite}
+.ticker-inner span{
+  padding:0 28px;font-size:.7rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--gray-mid);display:inline-flex;align-items:center;gap:12px;
+}
+.ticker-inner span::after{content:'◆';color:var(--gold);font-size:.5rem}
+@keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ── SECTION COMMONS ── */
+.s-tag{
+  display:inline-flex;align-items:center;gap:10px;
+  font-size:.7rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:14px;
+}
+.s-tag::before{content:'';width:20px;height:1px;background:var(--metal-gold)}
+.s-heading{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(2rem,4vw,3.6rem);
+  font-weight:300;line-height:1.1;
+  color:var(--white);
+}
+.s-heading em{
+  font-style:italic;font-weight:400;
+  background:var(--metal-gold);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+
+/* ── ABOUT ── */
+.about{
+  padding:120px 5%;
+  background:linear-gradient(135deg,#0E0E0E 0%,#151515 50%,#0A0A0A 100%);
+  display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;
+  border-top:1px solid rgba(212,175,55,.1);
+}
+.about-mosaic{position:relative;height:560px}
+.am-img{
+  position:absolute;overflow:hidden;
+  box-shadow:0 20px 60px rgba(0,0,0,.5);
+}
+.am-img img{width:100%;height:100%;object-fit:cover;display:block;filter:grayscale(15%)}
+.am-img:nth-child(1){
+  width:63%;height:68%;top:0;left:0;
+  border:1px solid rgba(212,175,55,.15);
+}
+.am-img:nth-child(2){
+  width:52%;height:60%;bottom:0;right:0;
+  border:1px solid rgba(200,200,200,.1);
+}
+.am-img:nth-child(3){
+  width:36%;height:42%;top:46%;left:44%;transform:translateY(-50%);
+  z-index:3;border-radius:50%;
+  border:3px solid;border-image:var(--metal-gold) 1;
+  box-shadow:0 0 0 6px var(--black-soft),0 20px 56px rgba(0,0,0,.6);
+  /* fallback for border-image on circle - use outline */
+  border:none;
+  outline:2px solid var(--gold);
+  outline-offset:4px;
+}
+.am-badge{
+  position:absolute;bottom:36px;left:-16px;z-index:4;
+  background:#1A1A1A;
+  border:1px solid rgba(212,175,55,.3);
+  border-radius:4px;padding:14px 20px;
+  display:flex;align-items:center;gap:12px;
+  box-shadow:0 12px 40px rgba(0,0,0,.5);
+}
+.am-badge .ab-icon{font-size:1.5rem}
+.am-badge .ab-label{font-size:.65rem;color:var(--gray-dark);font-weight:700;letter-spacing:.1em;text-transform:uppercase}
+.am-badge .ab-val{
+  font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:600;
+  background:var(--metal-gold);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.about-text p{font-size:.95rem;line-height:1.85;color:var(--gray-mid);margin-top:18px}
+.about-pills{display:flex;flex-wrap:wrap;gap:10px;margin-top:32px}
+.pill{
+  border:1px solid rgba(212,175,55,.2);color:var(--gray-light);
+  border-radius:2px;padding:8px 18px;font-size:.75rem;font-weight:600;letter-spacing:.06em;
+  background:rgba(212,175,55,.05);
+  transition:border-color .25s,background .25s;
+}
+.pill:hover{border-color:rgba(212,175,55,.5);background:rgba(212,175,55,.1)}
+
+/* ── SERVICES ── */
+.services{
+  padding:100px 5%;
+  background:linear-gradient(160deg,#080808 0%,#111 40%,#0C0C0C 100%);
+  position:relative;overflow:hidden;
+}
+.services::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:var(--metal-gold);opacity:.2;
+}
+.services::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:1px;
+  background:var(--metal-silver);opacity:.15;
+}
+.services-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:2px;margin-top:56px;
+  border:1px solid rgba(212,175,55,.12);
+}
+.svc-card{
+  overflow:hidden;position:relative;
+  background:var(--black-mid);
+  transition:transform .35s;
+  cursor:default;
+}
+.svc-card::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(to bottom,transparent 60%,rgba(212,175,55,.08) 100%);
+  opacity:0;transition:opacity .35s;z-index:1;pointer-events:none;
+}
+.svc-card:hover::before{opacity:1}
+.svc-card:hover{transform:scale(1.02);z-index:2;box-shadow:0 0 40px rgba(212,175,55,.15)}
+.svc-card img{width:100%;display:block;filter:grayscale(10%)}
+
+/* ── GALLERY ── */
+.gallery{
+  padding:120px 5%;
+  background:linear-gradient(135deg,#0E0E0E 0%,#131313 50%,#0A0A0A 100%);
+  border-top:1px solid rgba(212,175,55,.08);
+}
+.gallery-grid{
+  display:grid;
+  grid-template-columns:1.35fr 1fr 1fr;
+  grid-template-rows:260px 260px;
+  gap:3px;margin-top:56px;
+}
+.gi{position:relative;overflow:hidden}
+.gi:first-child{grid-row:1/3}
+.gi img{
+  width:100%;height:100%;object-fit:cover;display:block;
+  filter:grayscale(20%) contrast(1.05);
+  transition:transform .6s cubic-bezier(.25,.46,.45,.94),filter .6s;
+}
+.gi:hover img{transform:scale(1.07);filter:grayscale(0%) contrast(1)}
+.gi-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(8,8,8,.75) 0%,transparent 50%);
+  opacity:0;transition:opacity .4s;
+  display:flex;align-items:flex-end;padding:22px;
+}
+.gi:hover .gi-overlay{opacity:1}
+.gi-label{
+  font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  background:var(--metal-gold);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+/* gold corner on first image */
+.gi:first-child::before,.gi:first-child::after{
+  content:'';position:absolute;z-index:2;pointer-events:none;
+  width:18px;height:18px;
+}
+.gi:first-child::before{top:12px;left:12px;border-top:1.5px solid var(--gold);border-left:1.5px solid var(--gold)}
+.gi:first-child::after{bottom:12px;right:12px;border-bottom:1.5px solid var(--gold);border-right:1.5px solid var(--gold)}
+
+/* ── BOOKING ── */
+.booking{
+  padding:120px 5%;
+  background:linear-gradient(160deg,#080808 0%,#101010 50%,#0A0A0A 100%);
+  border-top:1px solid rgba(212,175,55,.08);
+  position:relative;overflow:hidden;
+}
+.booking::before{
+  content:'';position:absolute;top:-200px;right:-200px;
+  width:600px;height:600px;border-radius:50%;
+  background:radial-gradient(circle,rgba(212,175,55,.05) 0%,transparent 70%);
+  pointer-events:none;
+}
+.booking-layout{
+  display:grid;grid-template-columns:1fr 1.3fr;
+  gap:80px;align-items:start;position:relative;z-index:2;
+}
+.booking-info .s-heading{margin:12px 0 20px}
+.booking-info p{font-size:.93rem;line-height:1.85;color:var(--gray-mid)}
+.booking-promise{margin-top:36px;display:flex;flex-direction:column;gap:14px}
+.bp-item{
+  display:flex;align-items:center;gap:14px;
+  font-size:.86rem;color:var(--gray-light);font-weight:600;
+}
+.bp-check{
+  width:26px;height:26px;border-radius:50%;flex-shrink:0;
+  border:1px solid rgba(212,175,55,.4);
+  display:flex;align-items:center;justify-content:center;
+  font-size:.7rem;color:var(--gold);
+}
+/* form */
+.booking-form{
+  background:var(--black-soft);
+  border:1px solid rgba(212,175,55,.15);
+  border-radius:4px;padding:44px;
+  box-shadow:0 24px 80px rgba(0,0,0,.4);
+  position:relative;
+}
+/* gold corners on form */
+.booking-form::before,.booking-form::after{
+  content:'';position:absolute;width:16px;height:16px;pointer-events:none;
+}
+.booking-form::before{top:0;left:0;border-top:1.5px solid var(--gold);border-left:1.5px solid var(--gold)}
+.booking-form::after{bottom:0;right:0;border-bottom:1.5px solid var(--gold);border-right:1.5px solid var(--gold)}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.f-group{display:flex;flex-direction:column;gap:6px;margin-bottom:16px}
+.f-group.full{grid-column:1/-1}
+.f-group label{
+  font-size:.67rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--gray-dark);
+}
+.f-group input,.f-group select,.f-group textarea{
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:2px;padding:13px 16px;
+  color:var(--white);font-family:'Nunito Sans',sans-serif;font-size:.9rem;
+  outline:none;transition:border-color .25s,background .25s,box-shadow .25s;
+  width:100%;appearance:none;
+}
+.f-group input::placeholder,.f-group textarea::placeholder{color:var(--gray-dark);opacity:.7}
+.f-group select option{background:var(--black-mid);color:var(--white)}
+.f-group input:focus,.f-group select:focus,.f-group textarea:focus{
+  border-color:rgba(212,175,55,.5);
+  background:rgba(212,175,55,.04);
+  box-shadow:0 0 0 3px rgba(212,175,55,.07);
+}
+.f-group textarea{resize:vertical;min-height:100px}
+.form-submit-btn{
+  width:100%;padding:17px;border-radius:2px;border:none;cursor:pointer;
+  background:var(--metal-gold);color:var(--black);
+  font-family:'Nunito Sans',sans-serif;font-size:.82rem;font-weight:800;
+  letter-spacing:.12em;text-transform:uppercase;
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  transition:opacity .25s,transform .2s,box-shadow .25s;
+  box-shadow:0 6px 28px rgba(212,175,55,.3);margin-top:6px;
+}
+.form-submit-btn:hover{opacity:.88;transform:translateY(-2px);box-shadow:0 10px 40px rgba(212,175,55,.4)}
+.form-submit-btn svg{width:17px;height:17px;fill:var(--black)}
+
+/* ── CONTACT ── */
+.contact{
+  padding:100px 5%;text-align:center;
+  background:linear-gradient(160deg,#1A1A1A 0%,#111 50%,#222 100%);
+  border-top:1px solid rgba(212,175,55,.15);
+  position:relative;overflow:hidden;
+}
+.contact::before{
+  content:'HAPPY PUPS';
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(50px,10vw,120px);font-weight:700;
+  color:rgba(212,175,55,.04);white-space:nowrap;letter-spacing:.15em;
+  pointer-events:none;user-select:none;
+}
+.contact .s-tag{justify-content:center}
+.contact .s-heading{margin-top:10px;margin-bottom:12px}
+.contact-sub{color:rgba(255,255,255,.5);font-size:.93rem;max-width:420px;margin:0 auto 48px;line-height:1.8}
+.contact-grid{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+.c-card{
+  background:rgba(255,255,255,.03);
+  border:1px solid rgba(212,175,55,.15);
+  border-radius:4px;padding:26px 32px;
+  display:flex;align-items:center;gap:16px;
+  text-decoration:none;transition:all .3s;min-width:210px;
+  position:relative;overflow:hidden;
+}
+.c-card::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(212,175,55,.06) 0%,transparent 60%);
+  opacity:0;transition:opacity .3s;
+}
+.c-card:hover{border-color:rgba(212,175,55,.45);transform:translateY(-4px);box-shadow:0 16px 48px rgba(0,0,0,.4)}
+.c-card:hover::before{opacity:1}
+.c-card .cc-icon{font-size:1.5rem;line-height:1}
+.c-card .cc-label{font-size:.65rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gray-dark)}
+.c-card .cc-val{font-size:.94rem;font-weight:600;color:var(--gray-light);margin-top:3px}
+
+/* ── FOOTER ── */
+footer{
+  background:var(--black);
+  border-top:1px solid rgba(212,175,55,.1);
+  padding:28px 5%;
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;
+}
+footer img{height:34px;filter:brightness(0) invert(1);opacity:.4}
+footer p{font-size:.72rem;color:var(--gray-dark);letter-spacing:.06em}
+footer a{color:var(--gray-dark);text-decoration:none;font-size:.72rem;transition:color .25s}
+footer a:hover{color:var(--gold)}
+
+/* ── FLOATING WA ── */
+.wa-float{
+  position:fixed;bottom:32px;right:32px;z-index:900;
+  width:58px;height:58px;border-radius:50%;
+  background:#25D366;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 6px 28px rgba(37,211,102,.42);
+  text-decoration:none;
+  animation:wapulse 3s ease-in-out infinite;
+  transition:transform .25s;
+}
+.wa-float:hover{transform:scale(1.12);animation:none;box-shadow:0 10px 40px rgba(37,211,102,.55)}
+.wa-float svg{width:28px;height:28px;fill:#fff}
+@keyframes wapulse{
+  0%,100%{box-shadow:0 6px 28px rgba(37,211,102,.42)}
+  50%{box-shadow:0 6px 28px rgba(37,211,102,.42),0 0 0 14px rgba(37,211,102,.09)}
+}
+
+/* ── REVEAL ── */
+.reveal{opacity:0;transform:translateY(32px);transition:opacity .85s cubic-bezier(.25,.46,.45,.94),transform .85s cubic-bezier(.25,.46,.45,.94)}
+.reveal.in{opacity:1;transform:translateY(0)}
+.rd1{transition-delay:.12s}.rd2{transition-delay:.24s}.rd3{transition-delay:.36s}.rd4{transition-delay:.48s}
+
+/* ── RESPONSIVE ── */
+@media(max-width:1100px){
+  .hero{grid-template-columns:1fr;padding-top:110px;gap:40px}
+  .hero-video-wrap{max-width:640px;margin:0 auto;width:100%}
+  .about{grid-template-columns:1fr;gap:60px}
+  .about-mosaic{height:380px;max-width:500px;margin:0 auto}
+  .services-grid{grid-template-columns:1fr;max-width:440px;margin:56px auto 0;gap:3px}
+  .booking-layout{grid-template-columns:1fr}
+  .gallery-grid{grid-template-columns:1fr 1fr;grid-template-rows:220px 220px}
+  .gi:first-child{grid-row:auto}
+}
+@media(max-width:768px){
+  .nav-links,.nav-book{display:none}
+  .hamburger{display:flex}
+  #nav.open .nav-links{
+    display:flex;flex-direction:column;position:absolute;top:100%;left:0;right:0;
+    background:rgba(8,8,8,.98);backdrop-filter:blur(20px);
+    padding:24px 5% 32px;gap:20px;
+    border-bottom:1px solid rgba(212,175,55,.12);
+  }
+  #nav.open .nav-links a{font-size:.88rem}
+  #nav.open .nav-book{display:flex;margin-top:8px;justify-content:center}
+  .hero-stats{flex-direction:row;flex-wrap:wrap}
+  .hs-item{min-width:33%}
+  .booking-form{padding:24px 18px}
+  .form-row{grid-template-columns:1fr}
+  .gallery-grid{grid-template-columns:1fr;grid-template-rows:auto}
+  .gi{aspect-ratio:4/3}
+  .gi:first-child{aspect-ratio:16/9}
+  footer{flex-direction:column;text-align:center}
+  .am-badge{display:none}
+  .contact-grid{flex-direction:column;align-items:stretch;max-width:320px;margin:0 auto}
+}
+</style>
+</head>
+<body>
+
+<!-- PAW PRINTS — fixed, all over the viewport -->
+<script>
+(function(){
+  const pawSrc='https://res.cloudinary.com/dmrc5nwyd/image/upload/v1773510053/shopping-removebg-preview_eqvylz.png';
+  const paw=`<img src="${pawSrc}" alt="" draggable="false">`;
+  const positions = [
+    {top:'4%',  left:'2%',  sz:100, rot:-25, op:.18, delay:0,   dur:7},
+    {top:'4%',  left:'22%', sz:72,  rot:15,  op:.13, delay:1.2, dur:8},
+    {top:'4%',  left:'48%', sz:88,  rot:-10, op:.16, delay:2.4, dur:6.5},
+    {top:'4%',  left:'72%', sz:78,  rot:30,  op:.14, delay:0.6, dur:9},
+    {top:'4%',  right:'2%', sz:96,  rot:-18, op:.17, delay:3.1, dur:7.5},
+    {top:'16%', left:'8%',  sz:82,  rot:20,  op:.15, delay:1.8, dur:8.5},
+    {top:'16%', left:'38%', sz:110, rot:-35, op:.20, delay:0.3, dur:7},
+    {top:'16%', right:'8%', sz:90,  rot:12,  op:.16, delay:2.7, dur:9},
+    {top:'28%', left:'1%',  sz:76,  rot:-8,  op:.14, delay:4,   dur:6},
+    {top:'28%', left:'55%', sz:95,  rot:28,  op:.18, delay:1,   dur:8},
+    {top:'28%', right:'3%', sz:68,  rot:-22, op:.13, delay:2.2, dur:7.5},
+    {top:'40%', left:'14%', sz:104, rot:18,  op:.19, delay:0.5, dur:9},
+    {top:'40%', left:'62%', sz:80,  rot:-15, op:.15, delay:3.3, dur:8},
+    {top:'40%', right:'1%', sz:92,  rot:35,  op:.17, delay:1.5, dur:6.5},
+    {top:'52%', left:'3%',  sz:86,  rot:-30, op:.16, delay:2.8, dur:7},
+    {top:'52%', left:'42%', sz:74,  rot:10,  op:.13, delay:0.8, dur:9},
+    {top:'52%', right:'6%', sz:100, rot:-20, op:.18, delay:4.2, dur:8},
+    {top:'64%', left:'18%', sz:90,  rot:25,  op:.17, delay:1.3, dur:7.5},
+    {top:'64%', left:'68%', sz:78,  rot:-12, op:.14, delay:3.6, dur:6},
+    {top:'64%', right:'2%', sz:84,  rot:18,  op:.15, delay:0.9, dur:8.5},
+    {top:'76%', left:'4%',  sz:96,  rot:-28, op:.18, delay:2.1, dur:7},
+    {top:'76%', left:'36%', sz:70,  rot:8,   op:.12, delay:4.5, dur:9},
+    {top:'76%', right:'8%', sz:88,  rot:-16, op:.16, delay:1.7, dur:8},
+    {top:'88%', left:'12%', sz:82,  rot:22,  op:.15, delay:0.4, dur:6.5},
+    {top:'88%', left:'52%', sz:100, rot:-20, op:.18, delay:3,   dur:7.5},
+    {top:'88%', right:'3%', sz:76,  rot:14,  op:.14, delay:2.5, dur:8},
+  ];
+  function placePaws(){
+    document.querySelectorAll('.paw-deco').forEach(el=>el.remove());
+    const h=document.body.scrollHeight;
+    positions.forEach(p=>{
+      const d=document.createElement('div');
+      d.className='paw-deco';
+      const topPx=Math.round((parseFloat(p.top)/100)*h);
+      let s=`--sz:${p.sz}px;--rot:${p.rot}deg;--op:${p.op};--dur:${p.dur}s;animation-delay:${p.delay}s;top:${topPx}px;`;
+      if(p.left)  s+=`left:${p.left};`;
+      if(p.right) s+=`right:${p.right};`;
+      d.setAttribute('style',s);
+      d.innerHTML=paw;
+      document.body.appendChild(d);
+    });
+  }
+  placePaws();
+  window.addEventListener('load',placePaws);
+})();
+</script>
+
+<!-- NAV -->
+<nav id="nav">
+  <div style="display:flex;align-items:center;gap:12px">
+    <img src="https://res.cloudinary.com/dmrc5nwyd/image/upload/v1772882297/Dise%C3%B1o_sin_t%C3%ADtulo_1_yarynq.png" alt="Happy Pups Pet Salon" class="nav-logo">
+    <div class="nav-brand">
+      <div class="nav-brand-name">Happy Pups</div>
+      <div class="nav-brand-sub">Pet Salon</div>
+    </div>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#about">Nosotros</a></li>
+    <li><a href="#services">Servicios</a></li>
+    <li><a href="#gallery">Galería</a></li>
+    <li><a href="#booking">Reservar</a></li>
+    <li><a href="#contact">Contacto</a></li>
+  </ul>
+  <a href="#booking" class="nav-book">Reservar Cita</a>
+  <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-text">
+    <div class="hero-eyebrow">Aventura, Florida · Premier Pet Grooming</div>
+    <h1>Where every pup<br><strong>feels beautiful</strong></h1>
+    <p class="hero-sub">Grooming & spa services crafted with love for your four-legged family member. Professional, gentle, and always unforgettable.</p>
+    <div class="hero-btns">
+      <a href="#booking" class="btn-gold">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/></svg>
+        Reservar Cita
+      </a>
+      <a href="#services" class="btn-outline">Ver Servicios →</a>
+    </div>
+  </div>
+  <div class="hero-video-wrap">
+    <div class="hero-video-frame">
+      <video id="heroVideo" autoplay muted loop playsinline
+        poster="https://res.cloudinary.com/dmrc5nwyd/image/upload/v1772882297/Dise%C3%B1o_sin_t%C3%ADtulo_1_yarynq.png">
+        <source src="https://res.cloudinary.com/dmrc5nwyd/video/upload/v1773507651/SnapInsta.to_AQPa4Fbvv45TsCD1kXvUViRLmESb0OFT3LwVKJ9kg_qJZCWAHE00h7GSNVCOqmIUTi8hEJVKqeiAwdhzyZVc9u6Ob6FDu6RFW47UQko_dqvr1a.mp4" type="video/mp4">
+      </video>
+      <button class="mute-btn" id="muteBtn" onclick="toggleMute()" title="Toggle sound">
+        <svg id="iconMuted" viewBox="0 0 24 24"><path d="M16.5 12A4.5 4.5 0 0014 7.97v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51A8.796 8.796 0 0021 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06A8.99 8.99 0 0017.73 19L19 20.27 20.27 19 5.27 4 4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg>
+        <svg id="iconUnmuted" viewBox="0 0 24 24" style="display:none"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3A4.5 4.5 0 0014 7.97v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+      </button>
+    </div>
+    <div class="hero-stats">
+      <div class="hs-item">
+        <div class="hs-num">500+</div>
+        <div class="hs-label">Clientes Felices</div>
+      </div>
+      <div class="hs-item">
+        <div class="hs-num">5★</div>
+        <div class="hs-label">Rating Yelp</div>
+      </div>
+      <div class="hs-item">
+        <div class="hs-num">100%</div>
+        <div class="hs-label">Satisfacción</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-inner">
+    <span>Bath & Brush</span><span>Full Grooming</span><span>Nail Trim</span><span>Teeth Cleaning</span><span>Ear Cleaning</span><span>De-Shedding</span><span>Puppy's First Groom</span><span>Premium Shampoo</span><span>Blueberry Facial</span><span>Paw Massage</span>
+    <span>Bath & Brush</span><span>Full Grooming</span><span>Nail Trim</span><span>Teeth Cleaning</span><span>Ear Cleaning</span><span>De-Shedding</span><span>Puppy's First Groom</span><span>Premium Shampoo</span><span>Blueberry Facial</span><span>Paw Massage</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-mosaic reveal">
+    <div class="am-img">
+      <img src="https://res.cloudinary.com/dmrc5nwyd/image/upload/v1772882318/WhatsApp_Image_2026-03-06_at_21.30.49_f1sub9.jpg" alt="Grooming 1">
+    </div>
+    <div class="am-img">
+      <img src="https://res.cloudinary.com/dmrc5nwyd/image/upload/v1772882319/WhatsApp_Image_2026-03-06_at_21.30.49f_ogaehl.jpg" alt="Grooming 2">
+    </div>
+    <div class="am-img">
+      <img src="https://res.cloudinary.com/dmrc5nwyd/image/upload/v1772882317/WhatsApp_Image_2026-03-06_at_21.30.48_1_nbu2ig.jpg" alt="Grooming 3">
+    </div>
+    <div class="am-badge">
+      <div class="ab-icon">⭐</div>
+      <div>
+        <div class="ab-label">Calificación</div>
+        <div class="ab-val">5 Estrellas en Yelp</div>
+      </div>
+    </div>
+  </div>
+  <div class="reveal rd1">
+    <div class="s-tag">Sobre Nosotros</div>
+    <h2 class="s-heading">Tu mascota,<br>nuestra <em>pasión</em></h2>
+    <p>En Happy Pups Pet Salon, tratamos a cada perrito como si fuera nuestro propio. Con años de experiencia en Aventura, FL, ofrecemos peluquería canina de primera clase en un ambiente cálido y amoroso.</p>
+    <p>At Happy Pups, we believe every dog deserves to look and feel their absolute best. Our certified groomers use premium, gentle products tailored to every breed and temperament.</p>
+    <div class="about-pills">
+      <span class="pill">🏅 Groomers Certificados</span>
+      <span class="pill">🌿 Productos Naturales</span>
+      <span class="pill">❤️ Ambiente Familiar</span>
+      <span class="pill">✂️ Todas las Razas</span>
+      <span class="pill">📍 Aventura, FL</span>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="reveal" style="max-width:600px">
+    <div class="s-tag">Servicios & Precios</div>
+    <h2 class="s-heading">Grooming packages<br>for every <em>pup</em></h2>
+  </div>
+  <div class="services-grid">
+    <div class="svc-card reveal rd1"><img src="https://res.cloudinary.com/dmrc5nwyd/image/upload/v1772882337/Captura_de_pantalla_2026-03-06_231123_toqith.png" alt="Servicio 1"></div>
+    <div class="svc-card reveal rd2"><img src="https://res.cloudinary.com/dmrc5nwyd/image/upload/v1772882338/Captura_de_pantalla_2026-03-06_231137_dbvowu.png" alt="Servicio 2"></div>
+    <div class="svc-card reveal rd3"><img src="https://res.cloudinary.com/dmrc5nwyd/image/upload/v1772882340/Captura_de_pantalla_2026-03-06_231149_od77ah.png" alt="Servicio 3"></div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="gallery" id="gallery">
+  <div class="reveal" style="text-align:center">
+    <div class="s-tag" style="justify-content:center">Galería</div>
+    <h2 class="s-heading">Nuestros <em>peluditos</em></h2>
+  </div>
+  <div class="gallery-grid">
+    <div class="gi reveal">
+      <img src="https://res.cloudinary.com/dmrc5nwyd/image/upload/v1772882318/WhatsApp_Image_2026-03-06_at_21.30.49_f1sub9.jpg" alt="Happy pup">
+      <div class="gi-overlay"><div class="gi-label">Happy Pup ✦</div></div>
+    </div>
+    <div class="gi reveal rd1">
+      <img src="https://res.cloudinary.com/dmrc5nwyd/image/upload/v1772882319/WhatsApp_Image_2026-03-06_at_21.30.49f_ogaehl.jpg" alt="Freshly groomed">
+      <div class="gi-overlay"><div class="gi-label">Freshly Groomed</div></div>
+    </div>
+    <div class="gi reveal rd2">
+      <img src="https://res.cloudinary.com/dmrc5nwyd/image/upload/v1772882317/WhatsApp_Image_2026-03-06_at_21.30.48_1_nbu2ig.jpg" alt="Best pup">
+      <div class="gi-overlay"><div class="gi-label">Best Pup Ever</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- BOOKING -->
+<section class="booking" id="booking">
+  <div class="booking-layout">
+    <div class="booking-info reveal">
+      <div class="s-tag">Reservaciones</div>
+      <h2 class="s-heading">Agenda tu <em>cita</em></h2>
+      <p>Completa el formulario y te contactaremos por WhatsApp para confirmar tu cita. Fill out the form and we'll confirm via WhatsApp.</p>
+      <div class="booking-promise">
+        <div class="bp-item"><div class="bp-check">✓</div>Confirmación rápida por WhatsApp</div>
+        <div class="bp-item"><div class="bp-check">✓</div>Groomers certificados y con experiencia</div>
+        <div class="bp-item"><div class="bp-check">✓</div>Productos premium y seguros para tu perro</div>
+        <div class="bp-item"><div class="bp-check">✓</div>Ambiente tranquilo y libre de estrés</div>
+      </div>
+    </div>
+    <div class="booking-form reveal rd1">
+      <form id="bookingForm">
+        <div class="form-row">
+          <div class="f-group">
+            <label>Nombre / Name *</label>
+            <input type="text" id="f-name" placeholder="Tu nombre completo" required>
+          </div>
+          <div class="f-group">
+            <label>Correo / Email *</label>
+            <input type="email" id="f-email" placeholder="tu@email.com" required>
+          </div>
+          <div class="f-group">
+            <label>Teléfono / Phone *</label>
+            <input type="tel" id="f-phone" placeholder="(305) 000-0000" required>
+          </div>
+          <div class="f-group">
+            <label>Nombre del Perro *</label>
+            <input type="text" id="f-dog" placeholder="¿Cómo se llama?" required>
+          </div>
+          <div class="f-group">
+            <label>Servicio / Service *</label>
+            <select id="f-service" required>
+              <option value="">Seleccionar servicio...</option>
+              <option>Bath & Brush — Baño y Cepillado</option>
+              <option>Full Grooming — Corte Completo</option>
+              <option>Nail Trim — Corte de Uñas</option>
+              <option>Teeth Cleaning — Limpieza Dental</option>
+              <option>Ear Cleaning — Limpieza de Oídos</option>
+              <option>De-Shedding Treatment</option>
+              <option>Puppy's First Groom — Primer Baño</option>
+              <option>Paquete Especial / Special Package</option>
+            </select>
+          </div>
+          <div class="f-group">
+            <label>Fecha Preferida / Preferred Date</label>
+            <input type="date" id="f-date">
+          </div>
+          <div class="f-group">
+            <label>Hora Preferida / Preferred Time</label>
+            <input type="time" id="f-time">
+          </div>
+          <div class="f-group">
+            <label>Raza / Breed *</label>
+            <input type="text" id="f-breed" placeholder="Ej: Golden Retriever, Poodle..." required>
+          </div>
+          <div class="f-group">
+            <label>Edad / Age *</label>
+            <input type="text" id="f-age" placeholder="Ej: 2 años / 6 meses" required>
+          </div>
+          <div class="f-group full">
+            <label>Condición Médica / Medical Condition</label>
+            <textarea id="f-condition" placeholder="¿Tiene alguna condición de salud, alergia o necesidad especial? / Any health condition, allergy or special need?"></textarea>
+          </div>
+          <div class="f-group full">
+            <label>Notas Adicionales / Additional Notes</label>
+            <textarea id="f-notes" placeholder="Cualquier otra información importante... / Any other important information..."></textarea>
+          </div>
+        </div>
+        <button type="submit" class="form-submit-btn">
+          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Enviar por WhatsApp
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="s-tag reveal">Contacto</div>
+  <h2 class="s-heading reveal rd1">Estamos aquí <em>para ti</em></h2>
+  <p class="contact-sub reveal rd2">¿Tienes preguntas? Contáctanos directamente. We're always happy to help.</p>
+  <div class="contact-grid reveal rd3">
+    <a href="https://wa.me/17866610388" target="_blank" class="c-card">
+      <div class="cc-icon">💬</div>
+      <div><div class="cc-label">WhatsApp</div><div class="cc-val">(786) 661-0388</div></div>
+    </a>
+    <div class="c-card">
+      <div class="cc-icon">📍</div>
+      <div><div class="cc-label">Ubicación</div><div class="cc-val">Aventura, FL</div></div>
+    </div>
+    <a href="https://www.yelp.com/biz/happy-pups-pet-salon-aventura" target="_blank" class="c-card">
+      <div class="cc-icon">⭐</div>
+      <div><div class="cc-label">Reseñas Yelp</div><div class="cc-val">Ver perfil →</div></div>
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <img src="https://res.cloudinary.com/dmrc5nwyd/image/upload/v1772882297/Dise%C3%B1o_sin_t%C3%ADtulo_1_yarynq.png" alt="Happy Pups">
+  <p>© 2026 Happy Pups Pet Salon · Aventura, FL · All rights reserved</p>
+  <a href="tel:+17866610388">(786) 661-0388</a>
+</footer>
+
+<!-- FLOATING WHATSAPP -->
+<a href="https://wa.me/17866610388?text=%F0%9F%90%BE%20%C2%A1Hola%21%20Me%20gustar%C3%ADa%20reservar%20una%20cita%20en%20Happy%20Pups%20Pet%20Salon.%20%C2%BFPodr%C3%ADan%20darme%20informaci%C3%B3n%20sobre%20disponibilidad%20y%20servicios%3F%20%F0%9F%98%8A" target="_blank" class="wa-float" title="Reservar cita por WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<script>
+function toggleMute(){
+  const v=document.getElementById('heroVideo');
+  const btn=document.getElementById('muteBtn');
+  v.muted=!v.muted;
+  document.getElementById('iconMuted').style.display=v.muted?'block':'none';
+  document.getElementById('iconUnmuted').style.display=v.muted?'none':'block';
+  btn.classList.toggle('unmuted',!v.muted);
+}
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>nav.classList.toggle('solid',scrollY>60),{passive:true});
+document.getElementById('hamburger').addEventListener('click',()=>nav.classList.toggle('open'));
+document.querySelectorAll('.nav-links a').forEach(a=>a.addEventListener('click',()=>nav.classList.remove('open')));
+const io=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('in')})},{threshold:.1});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+const di=document.getElementById('f-date');
+if(di){const d=new Date();d.setDate(d.getDate()+1);di.min=d.toISOString().split('T')[0]}
+document.getElementById('bookingForm').addEventListener('submit',function(e){
+  e.preventDefault();
+  const n   = document.getElementById('f-name').value.trim();
+  const em  = document.getElementById('f-email').value.trim();
+  const ph  = document.getElementById('f-phone').value.trim();
+  const dg  = document.getElementById('f-dog').value.trim();
+  const sv  = document.getElementById('f-service').value;
+  const dt  = document.getElementById('f-date').value;
+  const tm  = document.getElementById('f-time').value;
+  const br  = document.getElementById('f-breed').value.trim();
+  const ag  = document.getElementById('f-age').value.trim();
+  const cd  = document.getElementById('f-condition').value.trim();
+  const nt  = document.getElementById('f-notes').value.trim();
+  if(!n||!em||!ph||!dg||!sv||!br||!ag){alert('Por favor completa todos los campos requeridos.\nPlease fill in all required fields.');return}
+  const lines=[
+    '🐾 *Nueva Reserva — Happy Pups Pet Salon*','',
+    `👤 *Nombre:* ${n}`,
+    `📧 *Correo:* ${em}`,
+    `📞 *Teléfono:* ${ph}`,
+    '',
+    '🐕 *Datos de la Mascota*',
+    `• Nombre: ${dg}`,
+    `• Raza: ${br}`,
+    `• Edad: ${ag}`,
+    cd?`• Condición: ${cd}`:'',
+    '',
+    '✂️ *Servicio:* '+sv,
+    dt?`📅 *Fecha:* ${dt}`:'',
+    tm?`🕐 *Hora:* ${tm}`:'',
+    nt?`📝 *Notas:* ${nt}`:'',
+    '','_happypupspetsalon.com_'
+  ].filter(Boolean).join('\n');
+  window.open(`https://wa.me/17866610388?text=${encodeURIComponent(lines)}`,'_blank');
+});
+</script>
+</body>
+</html>

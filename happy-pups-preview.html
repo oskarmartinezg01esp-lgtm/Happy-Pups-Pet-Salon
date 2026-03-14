@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Preview — Happy Pups Pet Salon</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#0A0A0A;font-family:'Nunito Sans',sans-serif;padding:32px 20px;min-height:100vh}
+h1{
+  text-align:center;margin-bottom:8px;
+  font-size:1.4rem;font-weight:700;letter-spacing:.08em;
+  background:linear-gradient(135deg,#BFA045,#F0D060,#D4AF37,#F5E890,#A8860A);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.subtitle{text-align:center;color:#555;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:48px}
+.devices{display:flex;gap:40px;align-items:flex-start;justify-content:center;flex-wrap:wrap}
+
+/* DEVICE SHELLS */
+.device{display:flex;flex-direction:column;align-items:center;gap:14px}
+.device-label{
+  font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  color:#D4AF37;display:flex;align-items:center;gap:8px;
+}
+.device-label svg{width:16px;height:16px;fill:#D4AF37}
+
+/* PHONE */
+.phone-shell{
+  width:280px;
+  background:#1A1A1A;
+  border-radius:40px;
+  padding:14px 10px;
+  box-shadow:0 0 0 2px #2A2A2A,0 0 0 4px #D4AF37,0 24px 80px rgba(0,0,0,.7);
+  position:relative;
+}
+.phone-shell::before{
+  content:'';position:absolute;top:18px;left:50%;transform:translateX(-50%);
+  width:60px;height:5px;background:#2A2A2A;border-radius:10px;z-index:2;
+}
+.phone-screen{
+  width:100%;height:580px;border-radius:28px;overflow:hidden;position:relative;
+}
+.phone-screen iframe{width:390px;height:844px;border:none;transform:scale(0.667);transform-origin:top left;pointer-events:none}
+
+/* TABLET */
+.tablet-shell{
+  width:460px;
+  background:#1A1A1A;
+  border-radius:24px;
+  padding:20px 14px;
+  box-shadow:0 0 0 2px #2A2A2A,0 0 0 4px #C8C8C8,0 24px 80px rgba(0,0,0,.7);
+}
+.tablet-screen{
+  width:100%;height:580px;border-radius:12px;overflow:hidden;
+}
+.tablet-screen iframe{width:768px;height:1024px;border:none;transform:scale(0.555);transform-origin:top left;pointer-events:none}
+
+/* DESKTOP */
+.desktop-shell{
+  width:600px;
+  background:#1A1A1A;
+  border-radius:12px 12px 0 0;
+  padding:20px 14px 0;
+  box-shadow:0 0 0 2px #2A2A2A,0 0 0 4px #333,0 24px 80px rgba(0,0,0,.7);
+}
+.desktop-bar{
+  display:flex;align-items:center;gap:6px;margin-bottom:10px;
+}
+.dot{width:10px;height:10px;border-radius:50%}
+.dot.r{background:#FF5F57}.dot.y{background:#FEBC2E}.dot.g{background:#28C840}
+.desktop-url{
+  flex:1;background:#111;border-radius:4px;padding:4px 10px;
+  font-size:.65rem;color:#555;letter-spacing:.04em;
+}
+.desktop-screen{
+  width:100%;height:370px;overflow:hidden;border-radius:4px 4px 0 0;
+}
+.desktop-screen iframe{width:1280px;height:800px;border:none;transform:scale(0.461);transform-origin:top left;pointer-events:none}
+.desktop-stand{
+  width:100%;display:flex;justify-content:center;
+}
+.stand-neck{width:80px;height:24px;background:#1A1A1A;border-left:2px solid #333;border-right:2px solid #333}
+.stand-base{width:200px;height:10px;background:#1A1A1A;border-radius:0 0 8px 8px;border:2px solid #333;border-top:none}
+
+/* OPEN BTN */
+.open-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  background:linear-gradient(135deg,#BFA045,#F0D060,#D4AF37);
+  color:#0A0A0A;padding:10px 24px;border-radius:4px;
+  font-size:.78rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;
+  text-decoration:none;margin-top:48px;
+  box-shadow:0 4px 20px rgba(212,175,55,.3);
+  transition:opacity .2s;
+}
+.open-btn:hover{opacity:.85}
+.center{text-align:center}
+</style>
+</head>
+<body>
+<h1>Happy Pups Pet Salon</h1>
+<p class="subtitle">Vista previa — Mobile · Tablet · Desktop</p>
+
+<div class="devices">
+
+  <!-- PHONE -->
+  <div class="device">
+    <div class="device-label">
+      <svg viewBox="0 0 24 24"><path d="M17 1.01L7 1c-1.1 0-2 .9-2 2v18c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V3c0-1.1-.9-1.99-2-1.99zM17 19H7V5h10v14z"/></svg>
+      Mobile — 390px
+    </div>
+    <div class="phone-shell">
+      <div class="phone-screen">
+        <iframe src="happy-pups.html" title="Mobile"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <!-- TABLET -->
+  <div class="device">
+    <div class="device-label">
+      <svg viewBox="0 0 24 24"><path d="M21 4H3c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 14H3V6h18v12z"/></svg>
+      Tablet — 768px
+    </div>
+    <div class="tablet-shell">
+      <div class="tablet-screen">
+        <iframe src="happy-pups.html" title="Tablet"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <!-- DESKTOP -->
+  <div class="device">
+    <div class="device-label">
+      <svg viewBox="0 0 24 24"><path d="M20 3H4c-1.1 0-2 .9-2 2v11c0 1.1.9 2 2 2h6l-2 3v1h8v-1l-2-3h6c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 13H4V5h16v11z"/></svg>
+      Desktop — 1280px
+    </div>
+    <div class="desktop-shell">
+      <div class="desktop-bar">
+        <div class="dot r"></div><div class="dot y"></div><div class="dot g"></div>
+        <div class="desktop-url">happy-pups.html</div>
+      </div>
+      <div class="desktop-screen">
+        <iframe src="happy-pups.html" title="Desktop"></iframe>
+      </div>
+    </div>
+    <div class="desktop-stand">
+      <div style="display:flex;flex-direction:column;align-items:center">
+        <div class="stand-neck"></div>
+        <div class="stand-base"></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="center">
+  <a href="happy-pups.html" target="_blank" class="open-btn">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M19 19H5V5h7V3H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg>
+    Abrir página completa
+  </a>
+</div>
+
+</body>
+</html>
