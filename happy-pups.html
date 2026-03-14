@@ -913,13 +913,14 @@ footer a:hover{color:var(--gold)}
 
 <script>
 /* ── LANGUAGE TOGGLE ── */
-const translations = {
+var HP_LANG = 'es';
+var HP_T = {
   es: {
     nav_about:'Nosotros', nav_services:'Servicios', nav_gallery:'Galería',
     nav_book_link:'Reservar', nav_contact:'Contacto', nav_book:'Reservar Cita',
     hero_eyebrow:'Aventura, Florida · Peluquería Premium',
     hero_h1:'Donde cada perrito<br><strong>merece lo mejor</strong>',
-    hero_sub:'Servicios de grooming & spa hechos con amor para tu compañero de cuatro patas. Profesional, suave e inolvidable.',
+    hero_sub:'Servicios de grooming &amp; spa hechos con amor para tu compañero de cuatro patas. Profesional, suave e inolvidable.',
     hero_btn1:'Reservar Cita', hero_btn2:'Ver Servicios →',
     stat1:'Clientes Felices', stat3:'Satisfacción',
     badge_label:'Calificación', badge_val:'5 Estrellas en Yelp',
@@ -929,7 +930,7 @@ const translations = {
     about_p2:'Nuestros groomers certificados usan productos premium y técnicas suaves adaptadas a cada raza y temperamento.',
     pill1:'🏅 Groomers Certificados', pill2:'🌿 Productos Naturales',
     pill3:'❤️ Ambiente Familiar', pill4:'✂️ Todas las Razas',
-    svc_tag:'Servicios & Precios',
+    svc_tag:'Servicios &amp; Precios',
     svc_h2:'Paquetes para<br>cada <em>perrito</em>',
     gal_tag:'Galería', gal_h2:'Nuestros <em>peluditos</em>',
     book_tag:'Reservaciones',
@@ -952,14 +953,14 @@ const translations = {
     contact_tag:'Contacto',
     contact_h2:'Estamos aquí <em>para ti</em>',
     contact_sub:'¿Tienes preguntas? Contáctanos directamente.',
-    contact_loc:'Ubicación', contact_yelp:'Reseñas Yelp', contact_yelp_val:'Ver perfil →',
+    contact_loc:'Ubicación', contact_yelp:'Reseñas Yelp', contact_yelp_val:'Ver perfil →'
   },
   en: {
     nav_about:'About', nav_services:'Services', nav_gallery:'Gallery',
     nav_book_link:'Book', nav_contact:'Contact', nav_book:'Book Now',
     hero_eyebrow:'Aventura, Florida · Premier Pet Grooming',
     hero_h1:'Where every pup<br><strong>feels beautiful</strong>',
-    hero_sub:'Grooming & spa services crafted with love for your four-legged family member. Professional, gentle, and always unforgettable.',
+    hero_sub:'Grooming &amp; spa services crafted with love for your four-legged family member. Professional, gentle, and always unforgettable.',
     hero_btn1:'Book Appointment', hero_btn2:'View Services →',
     stat1:'Happy Clients', stat3:'Satisfaction',
     badge_label:'Rating', badge_val:'5 Stars on Yelp',
@@ -969,19 +970,19 @@ const translations = {
     about_p2:'Our certified groomers use premium products and gentle techniques tailored to every breed and temperament.',
     pill1:'🏅 Certified Groomers', pill2:'🌿 Natural Products',
     pill3:'❤️ Family Environment', pill4:'✂️ All Breeds',
-    svc_tag:'Services & Pricing',
+    svc_tag:'Services &amp; Pricing',
     svc_h2:'Grooming packages<br>for every <em>pup</em>',
     gal_tag:'Gallery', gal_h2:'Our favorite <em>pups</em>',
     book_tag:'Reservations',
     book_h2:'Book your <em>appointment</em>',
-    book_p:'Fill out the form and we\'ll contact you via WhatsApp to confirm your appointment.',
+    book_p:"Fill out the form and we'll contact you via WhatsApp to confirm your appointment.",
     promise1:'Quick confirmation via WhatsApp',
     promise2:'Certified and experienced groomers',
     promise3:'Premium products safe for your dog',
     promise4:'Calm and stress-free environment',
     lbl_name:'Name *', ph_name:'Your full name',
     lbl_email:'Email *', lbl_phone:'Phone *',
-    lbl_dog:'Dog\'s Name *', ph_dog:'What\'s their name?',
+    lbl_dog:"Dog's Name *", ph_dog:"What's their name?",
     lbl_service:'Service *', opt_select:'Select a service...',
     lbl_date:'Preferred Date', lbl_time:'Preferred Time',
     lbl_breed:'Breed *', ph_breed:'E.g: Golden Retriever, Poodle...',
@@ -990,26 +991,29 @@ const translations = {
     lbl_notes:'Additional Notes', ph_notes:'Any other important information...',
     btn_submit:'Send via WhatsApp',
     contact_tag:'Contact',
-    contact_h2:'We\'re here <em>for you</em>',
-    contact_sub:'Have questions? Contact us directly. We\'re always happy to help.',
-    contact_loc:'Location', contact_yelp:'Yelp Reviews', contact_yelp_val:'View profile →',
+    contact_h2:"We're here <em>for you</em>",
+    contact_sub:"Have questions? Contact us directly. We're always happy to help.",
+    contact_loc:'Location', contact_yelp:'Yelp Reviews', contact_yelp_val:'View profile →'
   }
 };
-let currentLang = 'es';
-function toggleLang(){
-  currentLang = currentLang === 'es' ? 'en' : 'es';
-  const t = translations[currentLang];
-  const btn = document.getElementById('langBtn');
-  btn.textContent = currentLang === 'es' ? 'ES / EN' : 'EN / ES';
-  document.querySelectorAll('[data-i18n]').forEach(el=>{
-    const key = el.getAttribute('data-i18n');
-    if(t[key] !== undefined) el.innerHTML = t[key];
+function applyLang(lang) {
+  var t = HP_T[lang];
+  if (!t) return;
+  HP_LANG = lang;
+  var btn = document.getElementById('langBtn');
+  if (btn) btn.textContent = lang === 'es' ? 'ES | EN' : 'EN | ES';
+  document.querySelectorAll('[data-i18n]').forEach(function(el) {
+    var key = el.getAttribute('data-i18n');
+    if (t[key] !== undefined) el.innerHTML = t[key];
   });
-  document.querySelectorAll('[data-i18n-ph]').forEach(el=>{
-    const key = el.getAttribute('data-i18n-ph');
-    if(t[key] !== undefined) el.placeholder = t[key];
+  document.querySelectorAll('[data-i18n-ph]').forEach(function(el) {
+    var key = el.getAttribute('data-i18n-ph');
+    if (t[key] !== undefined) el.placeholder = t[key];
   });
-  document.querySelector('html').setAttribute('lang', currentLang);
+  document.documentElement.setAttribute('lang', lang);
+}
+function toggleLang() {
+  applyLang(HP_LANG === 'es' ? 'en' : 'es');
 }
 
 function toggleMute(){
